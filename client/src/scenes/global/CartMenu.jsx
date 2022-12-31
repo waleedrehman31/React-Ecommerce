@@ -104,11 +104,11 @@ const CartMenu = () => {
 										>
 											<AddIcon />
 										</IconButton>
-										{/* Price */}
-										<Typography fontWeight="bold">
-											${item.attributes.price}
-										</Typography>
 									</Box>
+									{/* Price */}
+									<Typography fontWeight="bold">
+										${item.attributes.price}
+									</Typography>
 								</FlexBox>
 								<Divider />
 							</Box>
@@ -119,23 +119,30 @@ const CartMenu = () => {
 						<FlexBox m="20px 0">
 							<Typography fontWight="bold">SUBTOTAL</Typography>
 							<Typography fontWight="bold">${totalPrice}</Typography>
-							<Button
-								sx={{
-									backgroundColor: shades.primary[400],
-									color: "white",
+						</FlexBox>
+						<Button
+							sx={{
+								backgroundColor: shades.primary[400],
+								color: "white",
+								borderRadius: 0,
+								minWidth: "100%",
+								padding: "20px 40px",
+								margin: "20px 0",
+								"&:hover": {
+									color: "black",
 									borderRadius: 0,
 									minWidth: "100%",
 									padding: "20px 40px",
 									margin: "20px 0",
-								}}
-								onClick={() => {
-									navigate("/checkout");
-									dispatch(setIsCartOpen({}));
-								}}
-							>
-								CHECKOUT
-							</Button>
-						</FlexBox>
+								},
+							}}
+							onClick={() => {
+								navigate("/checkout");
+								dispatch(setIsCartOpen({}));
+							}}
+						>
+							CHECKOUT
+						</Button>
 					</Box>
 				</Box>
 			</Box>
