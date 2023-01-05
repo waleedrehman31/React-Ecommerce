@@ -37,11 +37,12 @@ const Item = ({ item, width }) => {
 					alt={item.name}
 					width="300px"
 					height="400px"
+					objectFit="fit"
 					onClick={() => navigate(`/item/${item.id}`)}
 					style={{ cursor: "pointer" }}
 				/>
 				<Box
-					display={isHover ? "blocked" : "none"}
+					display={isHover ? "block" : "none"}
 					position="absolute"
 					bottom="10%"
 					left="0"
@@ -75,7 +76,7 @@ const Item = ({ item, width }) => {
 					</Box>
 				</Box>
 			</Box>
-			<Box mt="30px">
+			<Box mb="30px">
 				<Typography variant="subtitle2" color={neutral.dark}>
 					{category
 						.replace(/([A-Z])/g, " $1")

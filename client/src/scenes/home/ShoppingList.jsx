@@ -16,10 +16,9 @@ const ShoppingList = () => {
 	};
 
 	async function getItems() {
-		const item = await fetch(
-			"https://localhost:1337/api/items?populate=image",
-			{ method: "GET" },
-		);
+		const item = await fetch("http://localhost:1337/api/items?populate=image", {
+			method: "GET",
+		});
 		const itemsJson = await item.json();
 		dispatch(setItems(itemsJson.data));
 	}
@@ -38,7 +37,57 @@ const ShoppingList = () => {
 		(item) => item.attributes.category === "bestSellers",
 	);
 
-	return <Box width="80%" margin="80px auto"></Box>;
+	return (
+		<Box width="80%" margin="80px auto">
+			<Typography variant="h3" textAlign="center">
+				Our Featured <b>Products</b>
+			</Typography>
+			<Tabs
+				textColor="primary"
+				indicatorColor="primary"
+				value={value}
+				onChange={handleChange}
+				centered
+				TabIndicatorProps={{ sx: { display: isNonMobile ? "block" : "none" } }}
+				sx={{
+					m: "25px",
+					"& .MuiTabs-flexContainer": {
+						flexWrap: "wrap",
+					},
+				}}
+			>
+				<Tab label="All" value="all" />
+				<Tab label="NEW ARRIVALS" value="newArrivals" />
+				<Tab label="BEST SELLER" value="bestSellers" />
+				<Tab label="TOP RATED" value="topRated" />
+			</Tabs>
+			<Box
+				margin="0 auto"
+				display="grid"
+				gridTemplateColumns="repeat(auto-fill, 300px)"
+				justifyContent="space-around"
+				rowGap="20px"
+				columnGap="1.33%"
+			>
+				{value === "all" &&
+					items.map((item) => (
+						<Item item={item} key={`${item.name}-${item.id}`} />
+					))}
+				{value === "newArrivals" &&
+					newArrivalsItems.map((item) => (
+						<Item item={item} key={`${item.name}-${item.id}`} />
+					))}
+				{value === "bestSellers" &&
+					bestSellersItems.map((item) => (
+						<Item item={item} key={`${item.name}-${item.id}`} />
+					))}
+				{value === "topRated" &&
+					topRatedItems.map((item) => (
+						<Item item={item} key={`${item.name}-${item.id}`} />
+					))}
+			</Box>
+		</Box>
+	);
 };
 
 export default ShoppingList;
